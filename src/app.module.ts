@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { AppService } from './app.service';
-import { ProducerService } from './producer/producer.service';
+import { ProducerController } from './producer/producer.service';
 import { AppController } from './app.controller';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import {
@@ -9,6 +9,7 @@ import {
   RMQ_ORDER_QUEUE,
   RMQ_PAYMENT_QUEUE,
 } from './constants';
+import { ConsumerController } from './consumer/consumer.controller';
 
 @Module({
   imports: [
@@ -38,7 +39,7 @@ import {
       },
     ]),
   ],
-  controllers: [AppController],
-  providers: [AppService, ProducerService],
+  controllers: [AppController, ConsumerController],
+  providers: [AppService, ProducerController],
 })
 export class AppModule {}
